@@ -63,11 +63,11 @@
 package main
 
 import (
+	"fmt"
 	"sort"
 )
 
-// @lc code=start
-func minTaps(n int, ranges []int) int {
+func minTapsOld(n int, ranges []int) int {
 	var intervals [][2]int
 	for i, v := range ranges {
 		if v == 0 {
@@ -104,6 +104,46 @@ func minTaps(n int, ranges []int) int {
 
 func contains(v int, r [2]int) bool {
 	return r[0] <= v && v <= r[1]
+}
+
+// @lc code=start
+func minTaps(n int, ranges []int) int {
+	intervals := make([]int, n+1)
+
+	for i, v := range ranges {
+		if v == 0 {
+			continue
+		}
+		// intervals = append(intervals, [2]int{i - v, i + v})
+		left := max(0, i-v)
+		intervals[left] = max(intervals[left], i+v)
+	}
+
+	var end, max_reach, count int
+
+	for i := 0; i <= n; i++ {
+		if i > end {
+			if max_reach <= end {
+				return -1
+			}
+			end = max_reach
+			count++
+		}
+		max_reach = max(max_reach, intervals[i])
+	}
+
+	if end < n {
+		count++
+	}
+
+	return count
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 // @lc code=end
