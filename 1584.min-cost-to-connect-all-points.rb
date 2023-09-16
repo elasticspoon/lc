@@ -7,81 +7,101 @@
 # @lc code=start
 # @param {Integer[][]} points
 # @return {Integer}
-# def min_cost_connect_points(points)
-#   return 0 if points.length == 1
-#   edge_list = []
-#
-#   points.each_with_index do |a, i|
-#     points.each_with_index do |b, j|
-#       next if a == b
-#       dist = dist(a, b)
-#       edge_list.push([b, dist, a])
-#     end
-#   end
-#
-#   edge_list.sort_by! { |e| e[1] }
-#
-#   sum = 0
-#   puts edge_list.inspect
-#   visited = []
-#
-#   loop do
-#     if ()
-#
-#
-#
-#     break if visited.length == points.length
-#   end
-#
-#   sum
-# end
+class PriorityQueue
+  def initialize
+    @data = []
+    @mutex = Mutex.new
+  end
 
-def min_cost_connect_points(points)
-  return 0 if points.length == 1
-  hash = {}
-
-  points.each_with_index do |a, i|
-    points.each_with_index do |b, j|
-      next if a == b
-      dist = dist(a, b)
-      hash[a] = (hash[a] || []).push([b, dist])
+  def push(item, priority)
+    @mutex.synchronize do
+      @data << [item, priority]
+      heapify_up(@data.size - 1)
     end
   end
 
-  visited = {}
-  queue = []
-  current = points.first
-  sum = 0
-
-  loop do
-    visited[current] = true
-
-    queue.concat(hash[current])
-    queue = queue.reject { |v| visited[v[0]] }
-
-    min_weight = 0
-    min_edge = nil
-    queue.each do |edge|
-      if !visited[edge[1]] &&
-          (min_edge.nil? || edge[1] < min_weight)
-        min_weight = edge[1]
-        min_edge = edge
-      end
+  def pop
+    @mutex.synchronize do
+      return nil if empty?
+      swap(0, @data.size - 1)
+      item, _ = @data.pop
+      heapify_down(0)
+      item
     end
-    break if min_edge.nil?
-
-    queue.delete(min_edge)
-    sum += min_weight
-    current = min_edge[0]
-
-    # do while end
-    break if visited.length == points.length
   end
 
-  sum
+  def empty?
+    @data.empty?
+  end
+
+  private
+
+  def swap(i, j)
+    @data[i], @data[j] = @data[j], @data[i]
+  end
+
+  def heapify_up(index)
+    return if index.zero?
+
+    parent_index = (index - 1) / 2
+    return if @data[parent_index][1] <= @data[index][1]
+
+    swap(parent_index, index)
+    heapify_up(parent_index)
+  end
+
+  def heapify_down(index)
+    left_child_index = 2 * index + 1
+    right_child_index = 2 * index + 2
+    smallest = index
+
+    if left_child_index < @data.size && @data[left_child_index][1] < @data[smallest][1]
+      smallest = left_child_index
+    end
+
+    if right_child_index < @data.size && @data[right_child_index][1] < @data[smallest][1]
+      smallest = right_child_index
+    end
+
+    if smallest != index
+      swap(index, smallest)
+      heapify_down(smallest)
+    end
+  end
 end
 
-def dist(a, b)
+def min_cost_connect_points(points)
+  weight = 0
+  distances = Array.new(points.length) { Float::INFINITY }
+  distances[0] = 0
+
+  visited = []
+  queue = PriorityQueue.new
+  queue.push(0, 0)
+
+  until queue.empty?
+    current = queue.pop
+    current_dist = distances[current]
+
+    next if visited[current]
+
+    visited[current] = true
+    weight += current_dist
+
+    points.each_with_index do |point, index|
+      next if visited[index]
+      next_dist = manhattan_dist(points[current], point)
+
+      if next_dist < distances[index]
+        queue.push(index, next_dist)
+        distances[index] = next_dist
+      end
+    end
+  end
+  weight
+end
+
+def manhattan_dist(a, b)
   x1, y1 = a
   x2, y2 = b
 

@@ -8,7 +8,6 @@ package main
 
 import (
 	"container/heap"
-	"fmt"
 	"math"
 )
 
@@ -17,24 +16,27 @@ type Item struct {
 	distance, point int
 }
 
-type PriorityQueue []Item
+//	type Item struct {
+//		distance, point int
+//	}
+type PriorityQueue1584 []Item
 
-func (pq PriorityQueue) Len() int { return len(pq) }
+func (pq PriorityQueue1584) Len() int { return len(pq) }
 
-func (pq PriorityQueue) Less(i, j int) bool {
+func (pq PriorityQueue1584) Less(i, j int) bool {
 	return pq[i].distance < pq[j].distance
 }
 
-func (pq PriorityQueue) Swap(i, j int) {
+func (pq PriorityQueue1584) Swap(i, j int) {
 	pq[i], pq[j] = pq[j], pq[i]
 }
 
-func (pq *PriorityQueue) Push(x interface{}) {
+func (pq *PriorityQueue1584) Push(x interface{}) {
 	item := x.(Item)
 	*pq = append(*pq, item)
 }
 
-func (pq *PriorityQueue) Pop() interface{} {
+func (pq *PriorityQueue1584) Pop() interface{} {
 	old := *pq
 	n := len(old)
 	item := old[n-1]
@@ -46,43 +48,84 @@ func manhattanDistance(p1, p2 []int) int {
 	return int(math.Abs(float64(p1[0]-p2[0])) + math.Abs(float64(p1[1]-p2[1])))
 }
 
+//	func minCostConnectPoints(points [][]int) int {
+//		heapDict := make(map[int]int)
+//		for i := range points {
+//			heapDict[i] = int(math.MaxInt64) // Initialize all distances to infinity
+//		}
+//		heapDict[0] = 0 // Start node
+//
+//		queue := make(PriorityQueue, 1)
+//		queue[0] = Item{distance: 0, point: 0}
+//		heap.Init(&queue)
+//
+//		visited := make(map[int]bool, len(points))
+//		mstWeight := 0
+//
+//		for queue.Len() > 0 {
+//			current := heap.Pop(&queue).(Item)
+//			weight, point := current.distance, current.point
+//
+//			if visited[point] || heapDict[point] < weight {
+//				continue
+//			}
+//
+//			visited[point] = true
+//			mstWeight += weight
+//
+//			for v := range points {
+//				if !visited[v] {
+//
+//					newDistance := manhattanDistance(points[point], points[v])
+//
+//					if newDistance < heapDict[v] {
+//						heapDict[v] = newDistance
+//						heap.Push(&queue, Item{distance: newDistance, point: v})
+//					}
+//				}
+//			}
+//		}
+//
+//		return mstWeight
+//	}
 func minCostConnectPoints(points [][]int) int {
-	heapDict := make(map[int]int)
-	for i := 0; i < len(points); i++ {
-		heapDict[i] = int(math.MaxInt64) // Initialize all distances to infinity
+	minDist := make(map[int]int)
+	for i := range points {
+		minDist[i] = int(math.MaxInt64) // Initialize all distances to infinity
 	}
-	heapDict[0] = 0 // Start node
+	minDist[0] = 0 // Start node
 
-	queue := make(PriorityQueue, 1)
+	queue := make(PriorityQueue1584, 1)
 	queue[0] = Item{distance: 0, point: 0}
 	heap.Init(&queue)
 
-	visited := make([]bool, len(points))
-	mstWeight := 0
+	visited := make(map[int]bool, len(points))
+	sum := 0
 
 	for queue.Len() > 0 {
 		current := heap.Pop(&queue).(Item)
-		w, u := current.distance, current.point
+		currDist, point := current.distance, current.point
 
-		if visited[u] || heapDict[u] < w {
+		if visited[point] || minDist[point] < currDist {
 			continue
 		}
 
-		visited[u] = true
-		mstWeight += w
+		visited[point] = true
+		sum += currDist
 
-		for v := 0; v < len(points); v++ {
+		for v := range points {
 			if !visited[v] {
-				newDistance := manhattanDistance(points[u], points[v])
-				if newDistance < heapDict[v] {
-					heapDict[v] = newDistance
+				newDistance := manhattanDistance(points[point], points[v])
+
+				if newDistance < minDist[v] {
+					minDist[v] = newDistance
 					heap.Push(&queue, Item{distance: newDistance, point: v})
 				}
 			}
 		}
 	}
 
-	return mstWeight
+	return sum
 }
 
 // @lc code=end
