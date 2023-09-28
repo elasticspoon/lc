@@ -114,3 +114,62 @@ function makeArmy() {
 }
 
 let army = makeArmy();
+
+function makeCounter() {
+  let count = 0;
+
+  counter.set = function (val) {
+    count = val;
+  };
+
+  counter.decrease = function () {
+    count--;
+  };
+
+  function counter() {
+    return ++count;
+  }
+
+  return counter;
+}
+
+let counter = makeCounter();
+
+function sum(a) {
+  let sum = a;
+
+  function nestedFunc(b) {
+    sum += b;
+    return nestedFunc;
+  }
+
+  nestedFunc[Symbol.toPrimitive] = function () {
+    return sum;
+  };
+
+  return nestedFunc;
+}
+
+function throttle(func, ms) {
+  let lastArgs, lastThis;
+  let isThrottled = false;
+
+  return function wrapper() {
+    if (isThrottled) {
+      lastArgs = arguments;
+      lastThis = this;
+      return;
+    }
+
+    func.apply(this, arguments);
+    isThrottled = true;
+
+    setTimeout(() => {
+      isThrottled = false;
+      if (lastArgs) {
+        wrapper.apply(lastThis, lastArgs);
+        lastArgs = lastThis = null;
+      }
+    }, ms);
+  };
+}

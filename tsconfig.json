@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "strict": "true",
-    "target": "ESNext"
-  }
+    "strict": true,
+    "target": "ESNext",
+    "outDir": "./dist"
+  },
+  "include": ["316.remove-duplicate-letters.ts"]
 }

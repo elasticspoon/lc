@@ -42,20 +42,20 @@ func kWeakestRows(mat [][]int, k int) []int {
 
 // @lc code=end
 
-func main() {
-	mat := [][]int{
-		{1, 1, 0, 0, 0},
-		{1, 1, 1, 1, 0},
-		{1, 0, 0, 0, 0},
-		{1, 1, 0, 0, 0},
-		{1, 1, 1, 1, 1},
-	}
-	fmt.Println(kWeakestRows(mat, 3))
-	mat = [][]int{
-		{1, 0, 0, 0},
-		{1, 1, 1, 1},
-		{1, 0, 0, 0},
-		{1, 0, 0, 0},
-	}
-	fmt.Println(kWeakestRows(mat, 2))
-}
+// func main() {
+// 	mat := [][]int{
+// 		{1, 1, 0, 0, 0},
+// 		{1, 1, 1, 1, 0},
+// 		{1, 0, 0, 0, 0},
+// 		{1, 1, 0, 0, 0},
+// 		{1, 1, 1, 1, 1},
+// 	}
+// 	fmt.Println(kWeakestRows(mat, 3))
+// 	mat = [][]int{
+// 		{1, 0, 0, 0},
+// 		{1, 1, 1, 1},
+// 		{1, 0, 0, 0},
+// 		{1, 0, 0, 0},
+// 	}
+// 	fmt.Println(kWeakestRows(mat, 2))
+// }
