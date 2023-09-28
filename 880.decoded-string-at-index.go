@@ -57,7 +57,7 @@ func decodeAtIndex(s string, k int) string {
 }
 
 // @lc code=end
-func main() {
+func main880() {
 	fmt.Println(decodeAtIndex("leet2code3", 10) == "o")
 	fmt.Println(decodeAtIndex("ha22", 5) == "h")
 	fmt.Println(decodeAtIndex("a2345678999999999999999", 1) == "a")
