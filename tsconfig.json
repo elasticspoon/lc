@@ -4,5 +4,5 @@
     "target": "ESNext",
     "outDir": "./dist"
   },
-  "include": ["316.remove-duplicate-letters.ts"]
+  "include": ["316.remove-duplicate-letters.ts", "456.132-pattern.ts"]
 }
