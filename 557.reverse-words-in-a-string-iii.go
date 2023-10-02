@@ -58,7 +58,7 @@ func reverseString(s string) string {
 }
 
 // @lc code=end
-func main() {
+func main557() {
 	input := "Let's take LeetCode contest"
 	output := reverseWords(input)
 	fmt.Println(output == "s'teL ekat edoCteeL tsetnoc")
