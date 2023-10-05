@@ -127,7 +127,7 @@ func (this *MyHashMap) hash(key int) int {
  * obj.Remove(key);
  */
 // @lc code=end
-func main() {
+func main706() {
 	obj := Constructor()
 	obj.Put(1, 1)
 	obj.Put(2, 2)

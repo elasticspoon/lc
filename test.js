@@ -24,8 +24,8 @@ function filterRangeInPlace(arr, a, b) {
   }
 }
 
-function copySorted(arr) {
-  let arr = [].concat(arr);
+function copySorted(array) {
+  let arr = [].concat(array);
   return arr.sort((a, b) => {
     return a - b;
   });
@@ -98,7 +98,7 @@ function makeArmy() {
   function makeShooter(i) {
     let shooter = function () {
       // create a shooter function,
-      alert(i); // that should show its number
+      // alert(i); // that should show its number
     };
     shooters.push(shooter); // and add it to the array
   }
@@ -172,4 +172,56 @@ function throttle(func, ms) {
       }
     }, ms);
   };
+}
+
+// loadJson("https://javascript.info/no-such-user.json").catch(console.log);
+class HttpError extends Error {
+  constructor(response) {
+    super(`${response.status} for ${response.url}`);
+    this.name = "HttpError";
+    this.response = response;
+  }
+}
+
+async function loadJson(url) {
+  let response = await fetch(url);
+  if (response.status == 200) {
+    return await response.json();
+  } else {
+    throw new HttpError(response.status);
+  }
+}
+
+// Ask for a user name until github returns a valid user
+async function demoGithubUser() {
+  while (true) {
+    try {
+      let name = prompt("Enter a name?", "iliakan");
+      let user = await loadJson(`https://api.github.com/users/${name}`);
+      console.log(`Full name: ${user.name}.`);
+      return user;
+    } catch (err) {
+      if (err instanceof HttpError && err.response.status == 404) {
+        console.log("No such user, please reenter.");
+      } else {
+        throw err;
+      }
+    }
+  }
+}
+
+// demoGithubUser();
+async function wait() {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  return 10;
+}
+
+function f() {
+  // ...what should you write here?
+  // we need to call async wait() and wait to get 10
+  // remember, we can't use "await"
+  new Promise((res) => {
+    res(wait());
+  }).then((v) => console.log(v));
 }
