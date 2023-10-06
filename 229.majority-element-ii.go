@@ -28,7 +28,7 @@ func majorityElement(nums []int) []int {
 }
 
 // @lc code=end
-func main() {
+func main229() {
 	fmt.Println(majorityElement([]int{3, 2, 3}))
 	fmt.Println(majorityElement([]int{1}))
 	fmt.Println(majorityElement([]int{1, 2}))
