@@ -10,42 +10,39 @@ import "fmt"
 // @lc code=start
 func searchRange(nums []int, target int) []int {
 	res := []int{-1, -1}
-	l := len(nums)
-	if l == 0 {
+
+	i, j := 0, len(nums)-1
+
+	if nums == nil || j < 0 {
 		return res
 	}
 
-	for left, right, p := 0, l-1, l/2; left <= right; {
-		if (p == 0 && nums[p] == target) ||
-			(p > 0 && nums[p-1] != target && nums[p] == target) {
-			res[0] = p
-			break
-		}
-
-		if nums[p] == target || nums[p] > target {
-			right = p - 1
-			p = (left + p) / 2
+	for i < j {
+		mid := (i + j) / 2
+		if nums[mid] < target {
+			i = mid + 1
 		} else {
-			left = p + 1
-			p = (p + right + 1) / 2
+			j = mid
 		}
 	}
 
-	for left, right, p := 0, l-1, l/2; left <= right; {
-		if (p == (l-1) && nums[p] == target) ||
-			(p < l-1 && nums[p+1] != target && nums[p] == target) {
-			res[1] = p
-			break
-		}
+	if nums[i] != target {
+		return res
+	} else {
+		res[0] = i
+	}
 
-		if nums[p] == target || nums[p] < target {
-			left = p + 1
-			p = (p + right + 1) / 2
+	j = len(nums) - 1
+
+	for i < j {
+		mid := (i+j)/2 + 1
+		if nums[mid] > target {
+			j = mid - 1
 		} else {
-			right = p - 1
-			p = (left + p) / 2
+			i = mid
 		}
 	}
+	res[1] = j
 
 	return res
 }
