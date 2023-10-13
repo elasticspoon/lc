@@ -5,8 +5,6 @@
  */
 package main
 
-// import "fmt"
-
 type MountainArray struct {
 	arr []int
 }
