@@ -45,7 +45,8 @@ type MyHashMap struct {
 	items int
 }
 
-func Constructor() MyHashMap {
+// func Constructor() MyHashMap {
+func HashMapConstructor() MyHashMap {
 	return constructor(1)
 }
 
@@ -128,7 +129,7 @@ func (this *MyHashMap) hash(key int) int {
  */
 // @lc code=end
 func main706() {
-	obj := Constructor()
+	obj := HashMapConstructor()
 	obj.Put(1, 1)
 	obj.Put(2, 2)
 	fmt.Println(obj.Get(1) == 1)
