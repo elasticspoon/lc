@@ -17,26 +17,26 @@ type Cell struct {
 	dist int
 }
 
-type PriorityQueue []Cell
+type PriorityQueue1631 []Cell
 
-func (pq PriorityQueue) Len() int {
+func (pq PriorityQueue1631) Len() int {
 	return len(pq)
 }
 
-func (pq PriorityQueue) Less(i, j int) bool {
+func (pq PriorityQueue1631) Less(i, j int) bool {
 	return pq[i].dist < pq[j].dist
 }
 
-func (pq PriorityQueue) Swap(i, j int) {
+func (pq PriorityQueue1631) Swap(i, j int) {
 	pq[i], pq[j] = pq[j], pq[i]
 }
 
-func (pq *PriorityQueue) Push(x any) {
+func (pq *PriorityQueue1631) Push(x any) {
 	item := x.(Cell)
 	*pq = append(*pq, item)
 }
 
-func (pq *PriorityQueue) Pop() any {
+func (pq *PriorityQueue1631) Pop() any {
 	old := *pq
 	n := len(old)
 	item := old[n-1]
@@ -75,7 +75,7 @@ func minimumEffortPath(heights [][]int) int {
 	dist[0][0] = 0
 	directions := [][2]int{{0, 1}, {0, -1}, {1, 0}, {-1, 0}}
 
-	queue := &PriorityQueue{Cell{0, 0, 0}}
+	queue := &PriorityQueue1631{Cell{0, 0, 0}}
 	heap.Init(queue)
 
 	for queue.Len() > 0 {
