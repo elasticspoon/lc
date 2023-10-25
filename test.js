@@ -1,3 +1,79 @@
+function addNumDesc(tree) {
+  let lis = tree.querySelectorAll("li")
+  for (let li of lis) {
+    if (li.childElementCount > 0) {
+      li.childNodes[0].textContent += ` [${li.querySelectorAll("li").length}]`
+    }
+  }
+}
+function sortTable(table, prop) {
+  let headers = [...table.querySelectorAll("thead th")]
+  let index = headers.findIndex((v) => v.textContent == prop)
+
+  if (index == -1) {
+    return
+  }
+
+  let rows = [...table.querySelectorAll("tbody tr")]
+  rows.sort((a, b) => {
+    return a.children[index].textContent > b.children[index].textContent ? 1 : -1
+  })
+
+  table.lastElementChild.append(...rows)
+}
+
+function makeCalendar(elem, year, month) {
+  let calendar = document.createElement("table")
+  let header = document.createElement("tr")
+  for (let day of ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]) {
+    let th = document.createElement("th")
+    th.textContent = day
+    header.append(th)
+  }
+  calendar.append(header)
+
+  let offset = (new Date(year, month - 1)).getDay() - 1
+  let lastDay = (new Date(year, month, 0)).getDate()
+
+  for (let i = 0; i < 6; i++) {
+    let row = document.createElement("tr")
+    for (let j = 0; j < 7; j++) {
+      let td = document.createElement("td")
+      let date = i * 7 + j + 1 - offset
+      if (date <= lastDay && date > 0) {
+        td.textContent = date
+      }
+      row.append(td)
+    }
+    if (row.innerText.trim().length == 0) {
+      break
+    }
+    calendar.append(row)
+  }
+  elem.append(calendar)
+}
+
+
+
+function createTreeRec(container, data) {
+  for (let [k, v] of Object.entries(data)) {
+    let li = document.createElement("li")
+    li.textContent = k
+    if (Object.entries(v).length > 0) {
+      let ul = document.createElement("ul")
+      createTreeRec(ul, v)
+      li.append(ul)
+    }
+    container.append(li)
+  }
+}
+function createTree(container, data) {
+  let ul = document.createElement("ul")
+  createTreeRec(ul, data)
+  container.append(ul)
+}
+
+
 function camelize(string) {
   return string
     .split("-")
@@ -32,17 +108,17 @@ function copySorted(array) {
 }
 
 function Calculator() {
-  this.calculate = function (string) {
+  this.calculate = function(string) {
     let args = string.split(" ");
     this[args[1]](args[0], args[2]);
   };
-  this["+"] = function (a, b) {
+  this["+"] = function(a, b) {
     return a + b;
   };
-  this["-"] = function (a, b) {
+  this["-"] = function(a, b) {
     return a - b;
   };
-  this.addMethod = function (method, func) {
+  this.addMethod = function(method, func) {
     this[method] = func;
   };
 }
@@ -50,11 +126,11 @@ function Calculator() {
 let range = {
   from: 1,
   to: 5,
-  [Symbol.iterator]: function () {
+  [Symbol.iterator]: function() {
     return {
       current: this.from,
       final: this.to,
-      next: function () {
+      next: function() {
         return { done: this.current == this.final, value: this.current++ };
       },
     };
@@ -75,19 +151,19 @@ function count(obj) {
 }
 
 function inBetween(low, high) {
-  return function (item) {
+  return function(item) {
     return low <= item && item <= high;
   };
 }
 
 function inArray(array) {
-  return function (item) {
+  return function(item) {
     return array.includes(item);
   };
 }
 
 function byField(fieldName) {
-  return function (a, b) {
+  return function(a, b) {
     return a[fieldName] > b[fieldName] ? 1 : -1;
   };
 }
@@ -96,7 +172,7 @@ function makeArmy() {
   let shooters = [];
 
   function makeShooter(i) {
-    let shooter = function () {
+    let shooter = function() {
       // create a shooter function,
       // alert(i); // that should show its number
     };
@@ -118,11 +194,11 @@ let army = makeArmy();
 function makeCounter() {
   let count = 0;
 
-  counter.set = function (val) {
+  counter.set = function(val) {
     count = val;
   };
 
-  counter.decrease = function () {
+  counter.decrease = function() {
     count--;
   };
 
@@ -143,7 +219,7 @@ function sum(a) {
     return nestedFunc;
   }
 
-  nestedFunc[Symbol.toPrimitive] = function () {
+  nestedFunc[Symbol.toPrimitive] = function() {
     return sum;
   };
 
