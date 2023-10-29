@@ -1,3 +1,25 @@
+function scrollBotton(element) {
+  if (element) {
+    return element.scrollHeight - element.scrollTop - element.clientHeight
+  }
+}
+
+function scrollBarWidth() {
+  get
+
+  let elem = document.createElement("div")
+  elem.width = "300px"
+  elem.height = "300px"
+  elem.style.overflowY = "scroll"
+
+  document.body.append(elem)
+
+  let scrollWidth = elem.offsetWidth - elem.clientWidth
+
+  elem.remove()
+  return scrollWidth
+}
+
 function addNumDesc(tree) {
   let lis = tree.querySelectorAll("li")
   for (let li of lis) {
