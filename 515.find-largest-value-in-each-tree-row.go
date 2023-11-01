@@ -8,14 +8,14 @@ package main
 
 import "fmt"
 
-type TreeNode struct {
-	Left  *TreeNode
-	Right *TreeNode
+type TreeNode513 struct {
+	Left  *TreeNode513
+	Right *TreeNode513
 	Val   int
 }
 
-func (t *TreeNode) String() string {
-	queue := []*TreeNode{t}
+func (t *TreeNode513) String() string {
+	queue := []*TreeNode513{t}
 	result := ""
 	v := 1
 	count := 0
@@ -49,12 +49,12 @@ func (t *TreeNode) String() string {
  * }
  */
 
-func largestValues(root *TreeNode) []int {
+func largestValues(root *TreeNode513) []int {
 	if root == nil {
 		return nil
 	}
 
-	queue := []*TreeNode{root}
+	queue := []*TreeNode513{root}
 	result := []int{}
 
 	for len(queue) > 0 {

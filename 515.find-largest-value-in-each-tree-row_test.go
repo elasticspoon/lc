@@ -9,7 +9,7 @@ const null = -1 << 63
 
 func Test_largestValues(t *testing.T) {
 	type args struct {
-		root *TreeNode
+		root *TreeNode513
 	}
 	tests := []struct {
 		input []int
@@ -29,19 +29,19 @@ func Test_largestValues(t *testing.T) {
 	}
 }
 
-func createTree(list []int) *TreeNode {
-	tree := &TreeNode{Val: list[0]}
-	queue := []*TreeNode{tree}
+func createTree(list []int) *TreeNode513 {
+	tree := &TreeNode513{Val: list[0]}
+	queue := []*TreeNode513{tree}
 	for i := 1; i < len(list); i++ {
 		node := queue[0]
 		queue = queue[1:]
 		if list[i] != null {
-			node.Left = &TreeNode{Val: list[i]}
+			node.Left = &TreeNode513{Val: list[i]}
 			queue = append(queue, node.Left)
 		}
 		i++
 		if i < len(list) && list[i] != null {
-			node.Right = &TreeNode{Val: list[i]}
+			node.Right = &TreeNode513{Val: list[i]}
 			queue = append(queue, node.Right)
 		}
 	}
