@@ -14,22 +14,22 @@
  */
 package main
 
-type TreeNode struct {
-	Left  *TreeNode
-	Right *TreeNode
+type TreeNode501 struct {
+	Left  *TreeNode501
+	Right *TreeNode501
 	Val   int
 }
 
-func (t *TreeNode) Insert(v int) {
+func (t *TreeNode501) Insert(v int) {
 	if v < t.Val {
 		if t.Left == nil {
-			t.Left = &TreeNode{Val: v}
+			t.Left = &TreeNode501{Val: v}
 		} else {
 			t.Left.Insert(v)
 		}
 	} else {
 		if t.Right == nil {
-			t.Right = &TreeNode{Val: v}
+			t.Right = &TreeNode501{Val: v}
 		} else {
 			t.Right.Insert(v)
 		}
@@ -37,8 +37,8 @@ func (t *TreeNode) Insert(v int) {
 }
 
 // @lc code=start
-func findMode(root *TreeNode) []int {
-	queue := []*TreeNode{root}
+func findMode(root *TreeNode501) []int {
+	queue := []*TreeNode501{root}
 	var modes []int
 	nodeCount := make(map[int]int)
 	maxCount := 0
