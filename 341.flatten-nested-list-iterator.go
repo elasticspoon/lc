@@ -52,7 +52,7 @@ type NestedIterator struct {
 	index     int
 }
 
-func Constructor(nestedList []*NestedInteger) *NestedIterator {
+func ConstructorNestedIt(nestedList []*NestedInteger) *NestedIterator {
 	return &NestedIterator{
 		flattened: flatten(nestedList),
 		index:     0,
