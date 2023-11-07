@@ -19,7 +19,7 @@ func TestFindMode(t *testing.T) {
 	for _, tt := range tests {
 		root := buildTree501(tt.input)
 		got := findMode(root)
-		if reflect.DeepEqual(got, tt.want) {
+		if !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("findMode(%v) = %v, want %v", tt.input, got, tt.want)
 		}
 	}
