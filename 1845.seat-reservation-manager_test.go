@@ -5,7 +5,7 @@ import (
 )
 
 func TestSeatManger(t *testing.T) {
-	temp := Constructor(5)
+	temp := SMConstructor(5)
 	sm := &temp
 
 	expectReserve(t, sm, 1)

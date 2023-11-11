@@ -36,7 +36,7 @@ type SeatManager struct {
 	Counter int
 }
 
-func Constructor(n int) SeatManager {
+func SMConstructor(n int) SeatManager {
 	h := IntHeapSM{}
 	heap.Init(&h)
 	return SeatManager{&h, 1}

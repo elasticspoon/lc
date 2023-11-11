@@ -22,7 +22,12 @@ func TestRestoreArray(t *testing.T) {
 			t.Errorf("len wrong: restoreArray(%v) = %v, want %v", tt.adjacentPairs, got, tt.want)
 		}
 		if !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("restoreArray(%v) = %v, want %v", tt.adjacentPairs, got, tt.want)
+			for i, v := range got {
+				if v != tt.want[len(tt.want)-1-i] {
+					t.Errorf("restoreArray(%v) = %v, want %v", tt.adjacentPairs, got, tt.want)
+					break
+				}
+			}
 		}
 	}
 }
