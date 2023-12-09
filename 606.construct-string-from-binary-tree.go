@@ -10,10 +10,10 @@ import (
 	"strconv"
 )
 
-type TreeNode struct {
+type TreeNode606 struct {
 	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+	Left  *TreeNode606
+	Right *TreeNode606
 }
 
 // @lc code=start
@@ -26,7 +26,7 @@ type TreeNode struct {
  *     Right *TreeNode
  * }
  */
-func recTree2str(root *TreeNode) string {
+func recTree2str(root *TreeNode606) string {
 	if root == nil {
 		return "()"
 	}
@@ -43,7 +43,7 @@ func recTree2str(root *TreeNode) string {
 	return "(" + strconv.Itoa(root.Val) + l + r + ")"
 }
 
-func tree2str(root *TreeNode) string {
+func tree2str(root *TreeNode606) string {
 	l := recTree2str(root.Left)
 	r := recTree2str(root.Right)
 
