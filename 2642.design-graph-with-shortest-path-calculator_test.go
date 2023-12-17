@@ -3,7 +3,7 @@ package main
 import "testing"
 
 func TestDesignGraphWithShortestPathCalculator(t *testing.T) {
-	graph := Constructor(4, [][]int{{0, 2, 5}, {0, 1, 2}, {1, 2, 1}, {3, 0, 3}})
+	graph := GraphConstructor(4, [][]int{{0, 2, 5}, {0, 1, 2}, {1, 2, 1}, {3, 0, 3}})
 
 	if graph.ShortestPath(3, 2) != 6 {
 		t.Errorf("ShortestPath(3, 2) should be 6")

@@ -44,7 +44,7 @@ func (pq *PriorityQueue) Pop() any {
 	return item
 }
 
-func Constructor(n int, edges [][]int) Graph {
+func GraphConstructor(n int, edges [][]int) Graph {
 	graph := Graph{AdjacencyList: make([][]*Edge, n)}
 	for _, v := range edges {
 		graph.AddEdge(v)
