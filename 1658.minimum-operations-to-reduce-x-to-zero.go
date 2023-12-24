@@ -7,7 +7,7 @@
 package main
 
 // @lc code=start
-func minOperations(nums []int, x int) int {
+func minOperations1658(nums []int, x int) int {
 	target, n := -x, len(nums)
 	for _, v := range nums {
 		target += v
