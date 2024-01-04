@@ -5,7 +5,7 @@
  */
 
 // @lc code=start
-function minOperations(nums: number[], x: number): number {
+function minOperations1658(nums: number[], x: number): number {
   const reverseHash = new Map();
   reverseHash.set(0, 0);
 

@@ -7,7 +7,7 @@
 package main
 
 // @lc code=start
-func minOperations(s string) int {
+func minOperations1758(s string) int {
 	zeroStart, oneStart := '0', '1'
 	diffZero, diffOne := 0, 0
 
