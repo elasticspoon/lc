@@ -5,10 +5,10 @@
  */
 package main
 
-type TreeNode struct {
+type TreeNode94 struct {
 	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+	Left  *TreeNode94
+	Right *TreeNode94
 }
 
 // @lc code=start
@@ -20,7 +20,7 @@ type TreeNode struct {
  *     Right *TreeNode
  * }
  */
-func inorderTraversal(root *TreeNode) []int {
+func inorderTraversal(root *TreeNode94) []int {
 	if root == nil {
 		return []int{}
 	}
