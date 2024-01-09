@@ -3,10 +3,10 @@ package main
 import "testing"
 
 func TestRangeSumBST(t *testing.T) {
-	tree := &TreeNode{
+	tree := &TreeNode938{
 		10,
-		&TreeNode{5, &TreeNode{3, nil, nil}, &TreeNode{7, nil, nil}},
-		&TreeNode{15, nil, &TreeNode{18, nil, nil}},
+		&TreeNode938{5, &TreeNode938{3, nil, nil}, &TreeNode938{7, nil, nil}},
+		&TreeNode938{15, nil, &TreeNode938{18, nil, nil}},
 	}
 
 	tests := []struct {

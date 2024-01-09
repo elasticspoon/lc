@@ -5,10 +5,10 @@
  */
 package main
 
-type TreeNode struct {
+type TreeNode938 struct {
 	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+	Left  *TreeNode938
+	Right *TreeNode938
 }
 
 // @lc code=start
@@ -20,7 +20,7 @@ type TreeNode struct {
  *     Right *TreeNode
  * }
  */
-func rangeSumBST(root *TreeNode, low int, high int) int {
+func rangeSumBST(root *TreeNode938, low int, high int) int {
 	if root == nil {
 		return 0
 	}
