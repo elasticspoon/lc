@@ -15,7 +15,7 @@ func TestFoodRatings(t *testing.T) {
 	rating := []int{9, 12, 8, 15, 14, 7}
 
 	t.Run("test case 1", func(t *testing.T) {
-		ratings := Constructor(foods, genre, rating)
+		ratings := ConstructorFood(foods, genre, rating)
 
 		tests := []FoodTest{
 			{"h", 0, "korean", "kimchi"},

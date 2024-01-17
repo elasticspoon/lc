@@ -67,7 +67,7 @@ func (fh *FoodHeap) update(item *FoodItem, rating int) {
 	heap.Fix(fh, item.index)
 }
 
-func Constructor(foods []string, cuisines []string, ratings []int) FoodRatings {
+func ConstructorFood(foods []string, cuisines []string, ratings []int) FoodRatings {
 	fr := FoodRatings{
 		Cuisines: make(map[string]*FoodHeap),
 		Foods:    make(map[string]*FoodItem),
