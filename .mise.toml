@@ -1,0 +1,2 @@
+[tasks.ruby]
+run = "ruby _templates/new_problem.rb"
